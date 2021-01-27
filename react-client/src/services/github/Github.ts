@@ -1,4 +1,4 @@
-import { GitHubActivityData, GitHubUserSearchData } from "./types";
+import { GitHubActivityData } from "./types";
 
 import { Octokit } from '@octokit/rest';
 
@@ -15,17 +15,6 @@ export default class GitHubService {
         } catch (error) {
             console.log(error.message);
             throw new Error(`User ${error.message}`);
-        }
-    }
-
-    public static async searchUsers(partialUsername: string): Promise<GitHubUserSearchData> {
-        try {
-            const users = await octokit.search.users({q: encodeURIComponent(`${partialUsername} in:login`)})
-            
-            return users.data;
-        } catch (error) {
-            console.log(error.message);
-            throw new Error(error.message);
         }
     }
 }
